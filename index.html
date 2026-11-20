@@ -186,4 +186,47 @@ function vote(number) {
     "Твой голос: " + names[number] + " ❤️";
 }
 </script>
+ <style>
+#aura-box {
+  text-align: center;
+  padding: 30px;
+  margin: 30px auto;
+  background: #211638;
+  border-radius: 20px;
+  color: white;
+}
+#aura-box button {
+  padding: 14px 25px;
+  border: 0;
+  border-radius: 12px;
+  background: #a855f7;
+  color: white;
+  font-size: 18px;
+  cursor: pointer;
+}
+</style>
+
+<div id="aura-box">
+  <h2>💪 Счётчик ауры</h2>
+  <h1 id="aura-value">0</h1>
+  <button onclick="addAura()">+999 АУРЫ</button>
+  <p>Твоя мощь безгранична 🤑</p>
+</div>
+
+<script>
+let aura = Number(localStorage.getItem('aura') || 0);
+
+function updateAura() {
+  document.getElementById('aura-value').textContent =
+    aura.toLocaleString('ru-RU');
+}
+
+function addAura() {
+  aura += 999;
+  localStorage.setItem('aura', aura);
+  updateAura();
+}
+
+updateAura();
+</script>
 </body></html>
