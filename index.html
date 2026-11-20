@@ -251,9 +251,34 @@ body {
   100% { background-position: 0% 50%; }
 }
 </style>
+<style>
+    .flying-rooster {
+        position: fixed !important;
+        z-index: 9999 !important;
+        pointer-events: none;
+        opacity: 0.8;
+        animation-timing-function: linear;
+        animation-iteration-count: infinite;
+        top: 50%;
+        left: 0;
+    }
+
+    @keyframes flyAcross {
+        0% { left: -200px; transform: translateY(0) rotate(-10deg); }
+        50% { transform: translateY(-50px) rotate(10deg); }
+        100% { left: 100vw; transform: translateY(0) rotate(-10deg); }
+    }
+
+    @keyframes flyReverse {
+        0% { right: -200px; transform: translateY(0) scaleX(-1) rotate(10deg); }
+        50% { transform: translateY(50px) scaleX(-1) rotate(-10deg); }
+        100% { right: 100vw; transform: translateY(0) scaleX(-1) rotate(10deg); }
+    }
+</style>
+
 <script>
     const numberOfRoosters = 4;
-    const roosterImageURL = 'rooster.jpg'; // Проверь, чтобы картинка называлась именно так
+    const roosterImageURL = 'rooster.jpg'; // Твоя картинка
 
     function spawnRooster() {
         const rooster = document.createElement('img');
