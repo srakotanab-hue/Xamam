@@ -275,36 +275,55 @@ body {
         100% { right: 100vw; transform: translateY(0) scaleX(-1) rotate(10deg); }
     }
 </style>
-
 <script>
-    const numberOfRoosters = 4;
-    const roosterImageURL = 'rooster.jpg'; // Твоя картинка
+    // 1. Создаем невидимый слой поверх всего сайта
+    const pen = document.createElement('div');
+    pen.style.position = 'fixed';
+    pen.style.top = '0';
+    pen.style.left = '0';
+    pen.style.width = '100vw';
+    pen.style.height = '100vh';
+    pen.style.pointerEvents = 'none'; // Клики проходят сквозь петухов
+    pen.style.zIndex = '999999'; // Поверх всего
+    pen.style.overflow = 'hidden';
+    document.body.appendChild(pen);
 
-    function spawnRooster() {
-        const rooster = document.createElement('img');
-        rooster.src = roosterImageURL;
-        rooster.classList.add('flying-rooster');
-
-        rooster.style.top = Math.random() * 80 + 10 + 'vh';
-
-        const size = Math.random() * 90 + 60;
-        rooster.style.width = size + 'px';
-
-        const speed = Math.random() * 15 + 10;
-        rooster.style.animationDuration = speed + 's';
-        rooster.style.animationDelay = '-' + (Math.random() * speed) + 's';
-
-        if (Math.random() > 0.5) {
-            rooster.style.animationName = 'flyReverse';
-        } else {
-            rooster.style.animationName = 'flyAcross';
+    // 2. Добавляем анимации прямо в код
+    const style = document.createElement('style');
+    style.innerHTML = `
+        @keyframes flyRight {
+            0% { left: -200px; transform: rotate(-10deg); }
+            50% { transform: translateY(-30px) rotate(10deg); }
+            100% { left: 100vw; transform: rotate(-10deg); }
         }
+        @keyframes flyLeft {
+            0% { right: -200px; transform: scaleX(-1) rotate(10deg); }
+            50% { transform: scaleX(-1) translateY(30px) rotate(-10deg); }
+            100% { right: 100vw; transform: scaleX(-1) rotate(10deg); }
+        }
+    `;
+    document.head.appendChild(style);
 
-        document.body.appendChild(rooster);
-    }
-
-    for (let i = 0; i < numberOfRoosters; i++) {
-        spawnRooster();
+    // 3. Запускаем петухов
+    for (let i = 0; i < 5; i++) {
+        const rooster = document.createElement('img');
+        rooster.src = 'rooster.jpg';
+        
+        // Жестко фиксируем позиции, чтобы стили сайта их не сломали
+        rooster.style.position = 'absolute';
+        rooster.style.top = Math.random() * 80 + 10 + 'vh';
+        rooster.style.width = (Math.random() * 60 + 50) + 'px'; // Размер 50-110px
+        rooster.style.height = 'auto';
+        rooster.style.maxWidth = 'none'; 
+        rooster.style.opacity = '0.8';
+        
+        const speed = Math.random() * 10 + 8; // Скорость (8-18 секунд)
+        const anim = Math.random() > 0.5 ? 'flyLeft' : 'flyRight';
+        
+        rooster.style.animation = `${anim} ${speed}s linear infinite`;
+        rooster.style.animationDelay = '-' + (Math.random() * speed) + 's';
+        
+        pen.appendChild(rooster);
     }
 </script>
 </body>
