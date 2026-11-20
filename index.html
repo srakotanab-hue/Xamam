@@ -94,5 +94,83 @@ footer{padding:35px 0 45px;color:#8e819b;border-top:1px solid #30223a;font-size:
   });
 })();
 </script>
+<style>
+.vote-box {
+  margin: 40px 0;
+  padding: 30px 20px;
+  border-radius: 25px;
+  text-align: center;
+  background: linear-gradient(135deg,#32104f,#100719);
+  border: 2px solid #a64dff;
+  box-shadow: 0 0 35px #9b35ff55;
+}
+.vote-box h2 {color:#d69aff}
+.vote-btn {
+  display:block;
+  width:100%;
+  max-width:500px;
+  margin:14px auto;
+  padding:18px;
+  border:1px solid #a64dff;
+  border-radius:15px;
+  background:#21102f;
+  color:white;
+  font-size:16px;
+  font-weight:bold;
+  cursor:pointer;
+}
+.vote-btn:hover {background:#61258b}
+.vote-result {color:#d69aff;margin-top:20px}
+.donate {margin-top:35px;padding-top:20px;border-top:1px solid #71418d}
+</style>
 
+<section class="vote-box">
+  <h2>🔥 ГОЛОСОВАНИЕ 🔥</h2>
+  <p>Выбери свою реакцию!</p>
+
+  <button class="vote-btn" onclick="vote(1)">
+    1. ЧТООООО НИХУЯ СЕБЕ 😳
+  </button>
+
+  <button class="vote-btn" onclick="vote(2)">
+    2. ЕБАТЬ ОН КРУТОЙ 🔥
+  </button>
+
+  <button class="vote-btn" onclick="vote(3)">
+    3. Я ВАХУЕ С ЕГО АУРЫ 🙄
+  </button>
+
+  <div class="vote-result" id="voteResult">
+    Твой голос ещё не выбран!
+  </div>
+
+  <div class="donate">
+    <h2>❤️ ДОНАТ АДМИНУ</h2>
+    <p>Поддержка автора сайта</p>
+    <button class="vote-btn" disabled>
+      Донат скоро появится
+    </button>
+  </div>
+</section>
+
+<script>
+function vote(number) {
+  if (localStorage.getItem("xamamVote")) {
+    document.getElementById("voteResult").textContent =
+      "Ты уже проголосовал!";
+    return;
+  }
+
+  localStorage.setItem("xamamVote", number);
+
+  const names = {
+    1: "ЧТООООО НИХУЯ СЕБЕ 😳",
+    2: "ЕБАТЬ ОН КРУТОЙ 🔥",
+    3: "Я ВАХУЕ С ЕГО АУРЫ 🙄"
+  };
+
+  document.getElementById("voteResult").textContent =
+    "Твой голос: " + names[number] + " ❤️";
+}
+</script>
 </body></html>
