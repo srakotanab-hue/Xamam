@@ -276,54 +276,25 @@ body {
     }
 </style>
 <script>
-    // 1. Создаем невидимый слой поверх всего сайта
-    const pen = document.createElement('div');
-    pen.style.position = 'fixed';
-    pen.style.top = '0';
-    pen.style.left = '0';
-    pen.style.width = '100vw';
-    pen.style.height = '100vh';
-    pen.style.pointerEvents = 'none'; // Клики проходят сквозь петухов
-    pen.style.zIndex = '999999'; // Поверх всего
-    pen.style.overflow = 'hidden';
-    document.body.appendChild(pen);
-
-    // 2. Добавляем анимации прямо в код
-    const style = document.createElement('style');
-    style.innerHTML = `
-        @keyframes flyRight {
-            0% { left: -200px; transform: rotate(-10deg); }
-            50% { transform: translateY(-30px) rotate(10deg); }
-            100% { left: 100vw; transform: rotate(-10deg); }
-        }
-        @keyframes flyLeft {
-            0% { right: -200px; transform: scaleX(-1) rotate(10deg); }
-            50% { transform: scaleX(-1) translateY(30px) rotate(-10deg); }
-            100% { right: 100vw; transform: scaleX(-1) rotate(10deg); }
-        }
-    `;
-    document.head.appendChild(style);
-
-    // 3. Запускаем петухов
-    for (let i = 0; i < 5; i++) {
-        const rooster = document.createElement('img');
-        rooster.src = 'rooster.jpg';
-        
-        // Жестко фиксируем позиции, чтобы стили сайта их не сломали
-        rooster.style.position = 'absolute';
-        rooster.style.top = Math.random() * 80 + 10 + 'vh';
-        rooster.style.width = (Math.random() * 60 + 50) + 'px'; // Размер 50-110px
-        rooster.style.height = 'auto';
-        rooster.style.maxWidth = 'none'; 
-        rooster.style.opacity = '0.8';
-        
-        const speed = Math.random() * 10 + 8; // Скорость (8-18 секунд)
-        const anim = Math.random() > 0.5 ? 'flyLeft' : 'flyRight';
-        
-        rooster.style.animation = `${anim} ${speed}s linear infinite`;
-        rooster.style.animationDelay = '-' + (Math.random() * speed) + 's';
-        
-        pen.appendChild(rooster);
+<style>
+    .my-rooster {
+        position: fixed !important;
+        z-index: 9999 !important;
+        pointer-events: none !important;
+        width: 80px !important;
+        height: auto !important;
+        top: 20%;
+        left: -200px;
+        animation: fly 10s linear infinite !important;
     }
-</script>
+    @keyframes fly {
+        0% { transform: translateX(0); }
+        100% { transform: translateX(120vw); }
+    }
+</style>
+
+<img src="rooster.jpg" class="my-rooster" style="top: 10%; animation-duration: 12s;">
+<img src="rooster.jpg" class="my-rooster" style="top: 40%; animation-duration: 15s; animation-delay: -5s;">
+<img src="rooster.jpg" class="my-rooster" style="top: 70%; animation-duration: 9s; animation-delay: -2s;">
+<img src="rooster.jpg" class="my-rooster" style="top: 85%; animation-duration: 18s; animation-delay: -8s;">
 </body>
