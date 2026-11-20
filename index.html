@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#090711">
+<title>mishapro — мой мир</title>
+<style>
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#090711;color:#f5f2ff;font-family:Arial,Helvetica,sans-serif}
+body:before{content:"";position:fixed;inset:0;z-index:-1;background:radial-gradient(circle at 15% 15%,#5421a744,transparent 35%),radial-gradient(circle at 85% 55%,#8b18bd33,transparent 32%),#090711}
+.wrap{width:min(1080px,calc(100% - 36px));margin:auto}
+header{display:flex;justify-content:space-between;align-items:center;padding:24px 0}
+.brand{font-weight:900;letter-spacing:2px;color:white;text-decoration:none}.brand span{color:#b36aff}
+nav{display:flex;gap:22px}nav a{color:#c7bdd8;text-decoration:none;font-size:14px}nav a:hover{color:white}
+.hero{min-height:80vh;display:grid;grid-template-columns:1fr  .85fr;align-items:center;gap:35px;padding:50px 0 75px}
+.tag{display:inline-block;padding:8px 13px;border:1px solid #603b82;border-radius:99px;color:#d4aaff;background:#21132d;font-size:12px;letter-spacing:1.3px}
+h1{font-size:clamp(58px,10vw,108px);line-height:.92;margin:24px 0 18px;letter-spacing:-5px}h1 span{color:#bd69ff;text-shadow:0 0 35px #a62cff66}
+.intro{max-width:540px;color:#c2b8d1;font-size:18px;line-height:1.7}
+.buttons{display:flex;gap:12px;flex-wrap:wrap;margin-top:26px}.btn{padding:13px 19px;border-radius:12px;text-decoration:none;font-weight:700;font-size:14px;transition:.2s}
+.primary{background:linear-gradient(120deg,#a33cff,#6425d9);color:white;box-shadow:0 10px 35px #842be955}.secondary{border:1px solid #493657;color:#eee2ff;background:#17101f}.btn:hover{transform:translateY(-3px)}
+.photo-frame{position:relative;border:1px solid #7c35b8;border-radius:24px;padding:9px;background:linear-gradient(145deg,#a63cff55,#180c25);box-shadow:0 0 55px #932bce33;overflow:hidden}
+.photo-frame img{display:block;width:100%;height:auto;max-height:560px;object-fit:cover;border-radius:16px}
+section{padding:48px 0}.eyebrow{color:#c17bff;font-size:12px;letter-spacing:2px;text-transform:uppercase}h2{font-size:clamp(30px,5vw,44px);margin:10px 0 26px}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.card{padding:24px;border:1px solid #352543;border-radius:18px;background:linear-gradient(145deg,#21172dcc,#120e1be8);min-height:165px;transition:.25s}.card:hover{transform:translateY(-5px);border-color:#a65be0}
+.icon{font-size:28px}.card h3{margin:15px 0 8px;font-size:19px}.card p{color:#c0b5cd;line-height:1.6;font-size:14px;margin:0}
+.about{border:1px solid #352543;background:#171020bd;border-radius:20px;padding:28px;color:#c8bdd3;line-height:1.8}
+footer{padding:35px 0 45px;color:#8e819b;border-top:1px solid #30223a;font-size:13px}
+@media(max-width:760px){.hero{grid-template-columns:1fr;min-height:auto;padding-top:45px}.photo-frame{max-width:520px}.grid{grid-template-columns:1fr}nav{gap:12px}nav a{font-size:12px}h1{letter-spacing:-3px}}
+@media(max-width:420px){header{align-items:flex-start;gap:14px;flex-direction:column}}
+
+.intro-screen{position:fixed;inset:0;z-index:9999;background:#05030a;display:flex;align-items:center;justify-content:center;overflow:hidden;transition:opacity .7s ease,visibility .7s ease}
+.intro-screen.hidden{opacity:0;visibility:hidden;pointer-events:none}
+.intro-screen video{width:100%;height:100%;object-fit:contain;background:#05030a}
+.intro-controls{position:absolute;left:0;right:0;bottom:58px;display:flex;justify-content:center;gap:12px;flex-wrap:wrap;padding:0 16px}
+.intro-controls button{border:1px solid #a35bdb;background:#1b1028e8;color:#fff;border-radius:12px;padding:13px 18px;font-weight:700;font-size:14px;cursor:pointer;backdrop-filter:blur(8px)}
+.intro-controls button:hover{background:#63249a}
+.intro-hint{position:absolute;bottom:20px;color:#d6c6e6;font-size:11px;letter-spacing:1.5px;text-align:center}
+@media(max-width:480px){.intro-controls{bottom:55px}.intro-controls button{padding:12px 14px;font-size:13px}}
+
+</style>
+</head>
+<body>
+<div id="intro" class="intro-screen">
+  <video id="introVideo" autoplay muted playsinline preload="auto">
+    <source src="intro-video.mp4" type="video/mp4">
+    Твой браузер не поддерживает видео.
+  </video>
+  <div class="intro-controls">
+    <button id="soundBtn" type="button">🔇 Включить звук</button>
+    <button id="skipBtn" type="button">Пропустить видео →</button>
+  </div>
+  <div class="intro-hint">Видео запускается автоматически · MISHAPRO</div>
+</div>
+
+<div class="wrap">
+<header><a class="brand" href="#">misha<span>pro</span></a><nav><a href="#games">Игры</a><a href="#projects">Проекты</a><a href="#about">О сайте</a></nav></header>
+<main>
+<section class="hero">
+<div><div class="tag">МОЙ ЛИЧНЫЙ САЙТ</div><h1>misha<span>pro</span></h1><p class="intro">Добро пожаловать в мой мир! Здесь собраны мои любимые игры, проекты и всё, что мне интересно.</p><div class="buttons"><a class="btn primary" href="#games">Смотреть разделы</a><a class="btn secondary" href="#about">О сайте</a></div></div>
+<div class="photo-frame"><img src="nursultan-client.png" alt="Фото Nursultan Client"></div>
+</section>
+<section id="games"><div class="eyebrow">Мои интересы</div><h2>Любимые игры</h2><div class="grid">
+<article class="card"><div class="icon">⛏️</div><h3>Minecraft</h3><p>Миры, приключения, постройки и собственные игровые проекты.</p></article>
+<article class="card"><div class="icon">⚔️</div><h3>Warcraft III</h3><p>Азерот, стратегии и легендарные герои.</p></article>
+<article class="card"><div class="icon">🎮</div><h3>Другие игры</h3><p>Место для новых игр, достижений и игровых историй.</p></article></div></section>
+<section id="projects"><div class="eyebrow">Что я создаю</div><h2>Мои проекты</h2><div class="grid">
+<article class="card"><div class="icon">💻</div><h3>Программирование</h3><p>Эксперименты с кодом и новые идеи.</p></article>
+<article class="card"><div class="icon">🤖</div><h3>Боты и технологии</h3><p>Изучение автоматизации и возможностей искусственного интеллекта.</p></article>
+<article class="card"><div class="icon">✨</div><h3>Новые идеи</h3><p>Здесь будут появляться мои будущие работы.</p></article></div></section>
+<section id="about"><div class="eyebrow">Информация</div><h2>О сайте</h2><div class="about">Это личная страница <strong>mishapro</strong>. Сайт можно дополнять фотографиями, ссылками на соцсети и новыми проектами.</div></section>
+</main><footer>© 2026 mishapro · Сделано с интересом к технологиям</footer>
+</div>
+<script>
+(() => {
+  const intro = document.getElementById('intro');
+  const video = document.getElementById('introVideo');
+  const soundBtn = document.getElementById('soundBtn');
+  const skipBtn = document.getElementById('skipBtn');
+  const closeIntro = () => {
+    intro.classList.add('hidden');
+    setTimeout(() => intro.remove(), 750);
+  };
+  soundBtn.addEventListener('click', () => {
+    video.muted = !video.muted;
+    soundBtn.textContent = video.muted ? '🔇 Включить звук' : '🔊 Выключить звук';
+    if (!video.paused) return;
+    video.play().catch(() => {});
+  });
+  skipBtn.addEventListener('click', closeIntro);
+  video.addEventListener('ended', closeIntro);
+  video.play().catch(() => {
+    soundBtn.textContent = '▶ Запустить видео';
+    soundBtn.addEventListener('click', () => video.play().catch(() => {}), { once: true });
+  });
+})();
+</script>
+
+</body></html>
