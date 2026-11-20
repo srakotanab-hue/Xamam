@@ -251,4 +251,35 @@ body {
   100% { background-position: 0% 50%; }
 }
 </style>
+<script>
+    const numberOfRoosters = 4;
+    const roosterImageURL = 'rooster.jpg'; // Проверь, чтобы картинка называлась именно так
+
+    function spawnRooster() {
+        const rooster = document.createElement('img');
+        rooster.src = roosterImageURL;
+        rooster.classList.add('flying-rooster');
+
+        rooster.style.top = Math.random() * 80 + 10 + 'vh';
+
+        const size = Math.random() * 90 + 60;
+        rooster.style.width = size + 'px';
+
+        const speed = Math.random() * 15 + 10;
+        rooster.style.animationDuration = speed + 's';
+        rooster.style.animationDelay = '-' + (Math.random() * speed) + 's';
+
+        if (Math.random() > 0.5) {
+            rooster.style.animationName = 'flyReverse';
+        } else {
+            rooster.style.animationName = 'flyAcross';
+        }
+
+        document.body.appendChild(rooster);
+    }
+
+    for (let i = 0; i < numberOfRoosters; i++) {
+        spawnRooster();
+    }
+</script>
 </body>
